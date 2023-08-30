@@ -39,6 +39,9 @@ export class User {
   @Column()
   userPassword: string;
 
+  @Column()
+  isAdmin: boolean;
+
   @BeforeInsert()
   @BeforeUpdate()
   hashpassword() {
