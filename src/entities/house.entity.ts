@@ -6,8 +6,8 @@ export enum TypeEnum {
   RENT = "to rent",
 }
 
-@Entity("house")
-export class House {
+@Entity("realEstate")
+export class RealEstate {
   @PrimaryGeneratedColumn("uuid")
   id: string;
 
@@ -29,6 +29,6 @@ export class House {
   @Column({ nullable: true })
   rentStartDate: Date;
 
-  @ManyToOne(() => User, (user) => user.houses)
+  @ManyToOne(() => User, (user) => user.realEstate)
   user: User;
 }

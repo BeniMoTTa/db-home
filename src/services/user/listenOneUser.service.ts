@@ -7,7 +7,7 @@ export const listenOneUserService = async (id: string): Promise<User> => {
   const user = await userRepository.findOne({
     where: { id },
     relations: {
-      houses: true,
+      realEstate: true,
     },
     select: [
       "id",

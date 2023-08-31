@@ -7,7 +7,7 @@ import {
   BeforeUpdate,
   OneToMany,
 } from "typeorm";
-import { House } from "./house.entity";
+import { RealEstate } from "./house.entity";
 
 export enum UserGender {
   MALE = "male",
@@ -53,6 +53,6 @@ export class User {
   @Column({ type: "enum", enum: UserGender, default: UserGender.DEFAULT })
   gender: UserGender;
 
-  @OneToMany(() => House, (house) => house.user)
-  houses: House[];
+  @OneToMany(() => RealEstate, (real) => real.user)
+  realEstate: RealEstate[];
 }

@@ -1,5 +1,5 @@
 import { Router } from "express";
 
-export const houseRouter: Router = Router();
+export const realEstateRouter: Router = Router();
 
-houseRouter.post("");
+realEstateRouter.post("");
