@@ -3,7 +3,7 @@ import "express-async-errors";
 import express from "express";
 import cors from "cors";
 import { createAdmin, userRouter } from "./routers/users.routes";
-import { realEstateRouter } from "./routers/household.routes";
+import { realEstateRouter } from "./routers/realEstate.routes";
 
 const app = express();
 app.use(cors());

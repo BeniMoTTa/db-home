@@ -7,7 +7,7 @@ import {
   BeforeUpdate,
   OneToMany,
 } from "typeorm";
-import { RealEstate } from "./house.entity";
+import { RealEstate } from "./realEstate.entity";
 
 export enum UserGender {
   MALE = "male",
