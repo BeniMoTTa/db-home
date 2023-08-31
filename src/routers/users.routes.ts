@@ -6,6 +6,7 @@ import {
   deleteUserController,
   listenOneUserController,
   retrieveAllUserController,
+  updateUserController,
 } from "../controllers/users.controller";
 
 export const createAdmin = Router();
@@ -18,3 +19,4 @@ userRouter.post("", createUserController);
 userRouter.get("", retrieveAllUserController);
 userRouter.get("/:id", listenOneUserController);
 userRouter.delete("/:id", deleteUserController);
+userRouter.patch("/:id", updateUserController);

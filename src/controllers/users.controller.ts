@@ -4,6 +4,7 @@ import { createUserService } from "../services/user/createUser.service";
 import { retrieveUserService } from "../services/user/retrieveAllUsers.service";
 import { listenOneUserService } from "../services/user/listenOneUser.service";
 import { deleteUserService } from "../services/user/deleteUser.service";
+import { updateUserService } from "../services/user/updateUser.service";
 
 export const createUserController = async (req: Request, res: Response) => {
   const userData: TUser = req.body;
@@ -27,4 +28,8 @@ export const listenOneUserController = async (req: Request, res: Response) => {
 export const deleteUserController = async (req: Request, res: Response) => {
   await deleteUserService(req.params.id);
   return res.status(204).send();
+};
+export const updateUserController = async (req: Request, res: Response) => {
+  const updatedUser = await updateUserService(req.body, req.params.id);
+  return res.status(200).json(updatedUser);
 };
