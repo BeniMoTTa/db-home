@@ -3,6 +3,8 @@ import { createAdminController } from "../controllers/admin.controller";
 import { adminExistsMiddleware } from "../middlewares/adminExists.middleware";
 import {
   createUserController,
+  deleteUserController,
+  listenOneUserController,
   retrieveAllUserController,
 } from "../controllers/users.controller";
 
@@ -14,3 +16,5 @@ export const userRouter = Router();
 
 userRouter.post("", createUserController);
 userRouter.get("", retrieveAllUserController);
+userRouter.get("/:id", listenOneUserController);
+userRouter.delete("/:id", deleteUserController);

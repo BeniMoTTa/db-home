@@ -1,8 +1,9 @@
 import { Request, Response } from "express";
 import { TUser } from "../interfaces/user.interface";
-import { createUserService } from "../services/createUser.service";
-import { User } from "../entities/user.entity";
-import { retrieveUserService } from "../services/retrieveAllUsers.service";
+import { createUserService } from "../services/user/createUser.service";
+import { retrieveUserService } from "../services/user/retrieveAllUsers.service";
+import { listenOneUserService } from "../services/user/listenOneUser.service";
+import { deleteUserService } from "../services/user/deleteUser.service";
 
 export const createUserController = async (req: Request, res: Response) => {
   const userData: TUser = req.body;
@@ -17,4 +18,13 @@ export const retrieveAllUserController = async (
 ) => {
   const user = await retrieveUserService();
   return res.status(200).json(user);
+};
+
+export const listenOneUserController = async (req: Request, res: Response) => {
+  const user = await listenOneUserService(req.params.id);
+  return res.status(200).json(user);
+};
+export const deleteUserController = async (req: Request, res: Response) => {
+  await deleteUserService(req.params.id);
+  return res.status(204).send();
 };
