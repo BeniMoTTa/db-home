@@ -18,10 +18,10 @@ export class House {
   complement: string;
 
   @Column()
-  number: string;
+  number: number;
 
   @Column({ type: "enum", enum: TypeEnum, default: TypeEnum.BUY })
-  gender: TypeEnum;
+  type: TypeEnum;
 
   @Column({ nullable: true })
   rentDuration: number;
