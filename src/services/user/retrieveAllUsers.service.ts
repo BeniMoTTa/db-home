@@ -8,7 +8,7 @@ export const retrieveUserService = async (): Promise<TUserRetrieveAll> => {
 
   const findUsers: Array<User> = await repositoryClient.find({
     relations: {
-      houses: true,
+      realEstate: true,
     },
   });
 

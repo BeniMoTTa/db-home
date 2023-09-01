@@ -8,13 +8,13 @@ export const deleteUserService = async (id: string): Promise<void> => {
     where: {
       id: id,
     },
-    relations: ["houses"],
+    relations: ["realEstate"],
   });
 
   if (!user) {
     throw new Error("User not found");
   }
-  for (const house of user.houses) {
+  for (const house of user.realEstate) {
     await userRepository.manager.remove(house);
   }
 
