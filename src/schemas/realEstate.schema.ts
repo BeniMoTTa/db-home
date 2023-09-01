@@ -6,8 +6,8 @@ export const realEstateSchema = z.object({
   complement: z.string(),
   number: z.number(),
   type: z.nativeEnum(TypeEnum),
-  rentDuration: z.number().nullish(),
-  rentStartDate: z.date().optional(),
+  duration: z.number().nullish(),
+  rentStartDate: z.string().optional(),
 });
 
 export const returnRealEstateSchema = realEstateSchema.extend({

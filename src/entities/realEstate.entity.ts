@@ -24,9 +24,9 @@ export class RealEstate {
   type: TypeEnum;
 
   @Column({ nullable: true })
-  rentDuration: number;
+  duration: number;
 
-  @Column({ nullable: true })
+  @Column({ type: "date", nullable: true })
   rentStartDate: Date;
 
   @ManyToOne(() => User, (user) => user.realEstate)
