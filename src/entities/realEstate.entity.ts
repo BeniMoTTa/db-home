@@ -27,7 +27,7 @@ export class RealEstate {
   duration: number;
 
   @Column({ type: "date", nullable: true })
-  rentStartDate: Date;
+  rentStartDate: string;
 
   @ManyToOne(() => User, (user) => user.realEstate)
   user: User;

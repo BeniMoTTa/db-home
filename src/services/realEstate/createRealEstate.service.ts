@@ -20,18 +20,21 @@ export const createRealEstateService = async (
     throw new AppError("User not found");
   }
   const realEstateRepository = AppDataSource.getRepository(RealEstate);
-  const duration = data.type === TypeEnum.RENT ? data.duration : undefined;
-  const rentStartDate =
-    data.type === TypeEnum.RENT ? data.rentStartDate : undefined;
-  const realEstate = realEstateRepository.create({
+
+  const realEstateData: Partial<RealEstate> = {
     cep: data.cep,
     complement: data.complement,
-    number: data.number,
+    number: data.number || 0,
     type: data.type,
-    duration: duration,
-    rentStartDate: rentStartDate,
     user: user,
-  });
+  };
+
+  if (data.type === TypeEnum.RENT) {
+    realEstateData.duration = data.duration;
+    realEstateData.rentStartDate = data.rentStartDate;
+  }
+
+  const realEstate = realEstateRepository.create(realEstateData);
   await realEstateRepository.save(realEstate);
   const newRealEstate = returnRealEstateSchema.parse(realEstate);
   return newRealEstate;
