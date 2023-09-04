@@ -13,6 +13,7 @@ import { ensureUserExistsMiddleware } from "../middlewares/ensureUserExists.midd
 import { ensureUserLogged } from "../middlewares/ensureUserLogged.middleware";
 import { userSchema, userUpdateSchema } from "../schemas/users.schemas";
 import { createAdminController } from "../controllers/admin.controller";
+import { ensureIsAdminUnique } from "../middlewares/adminAlreadyExists.middleware";
 
 export const userRoutes = Router();
 
@@ -47,4 +48,4 @@ userRoutes.patch(
 
 export const createAdmin = Router();
 
-createAdmin.post("", createAdminController);
+createAdmin.post("", ensureIsAdminUnique, createAdminController);
