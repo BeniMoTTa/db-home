@@ -1,12 +1,16 @@
+import { Repository } from "typeorm";
 import { z } from "zod";
+import { Address, RealEstate } from "../entities";
 import {
+  addressSchema,
   realEstateSchema,
+  returnRetrieveAllRealEstate,
   returnRealEstateSchema,
-  returnRetrieveHouseSchema,
-} from "../schemas/realEstate.schema";
-import { DeepPartial } from "typeorm";
+} from "../schemas/realEstate.schemas";
 
-export type TRealEstate = z.infer<typeof realEstateSchema>;
-export type TRealEstateReturn = z.infer<typeof returnRealEstateSchema>;
-export type TRealEstateRetrieveAll = z.infer<typeof returnRetrieveHouseSchema>;
-export type TRealEstateUpdate = DeepPartial<TRealEstate>;
+export type RealEstateRequest = z.infer<typeof realEstateSchema>;
+export type AddressGet = z.infer<typeof addressSchema>;
+export type ReturnRealEstate = z.infer<typeof returnRealEstateSchema>;
+export type RepoRealEstate = Repository<RealEstate>;
+export type RepoAddress = Repository<Address>;
+export type ReturnAllRealEstates = z.infer<typeof returnRetrieveAllRealEstate>;

@@ -1,16 +1,20 @@
 import { Request, Response } from "express";
-import { createRealEstateService } from "../services/realEstate/createRealEstate.service";
+import { RealEstateRequest } from "../interfaces/realEstate.interface";
+import { listAllRealEstateService } from "../services/real_estate/listRealEstate.service";
+import { createRealEstateService } from "../services/real_estate/realEstate.address.service";
 
 export const createRealEstateController = async (
   req: Request,
   res: Response
 ) => {
-  try {
-    const realEstateData = req.body;
-    const contact = await createRealEstateService(realEstateData, req);
+  const realEstateData: RealEstateRequest = req.body;
 
-    return res.status(201).json(contact);
-  } catch (err) {
-    console.log(err);
-  }
+  const realEstateResponse = await createRealEstateService(realEstateData);
+  return res.status(201).json(realEstateResponse);
+};
+
+export const listRealEstateController = async (req: Request, res: Response) => {
+  const realEstate = await listAllRealEstateService();
+
+  return res.status(200).json(realEstate);
 };

@@ -1,34 +1,47 @@
-import { Entity, Column, PrimaryGeneratedColumn, ManyToOne } from "typeorm";
-import { User } from "./user.entity";
+import {
+  Entity,
+  Column,
+  PrimaryGeneratedColumn,
+  UpdateDateColumn,
+  CreateDateColumn,
+  OneToOne,
+  JoinColumn,
+  ManyToOne,
+  OneToMany,
+} from "typeorm";
+import { Address } from "./address.entity";
+import { Category } from "./categories.entity";
+import { Schedule } from "./schedule.entity";
 
-export enum TypeEnum {
-  BUY = "to buy",
-  RENT = "to rent",
+@Entity("real_estate")
+class RealEstate {
+  @PrimaryGeneratedColumn("increment")
+  id: number;
+
+  @Column({ type: "boolean", default: false })
+  sold: boolean;
+
+  @Column({ type: "decimal", precision: 12, scale: 2, default: 0 })
+  value: number | string;
+
+  @Column({ type: "integer" })
+  size: number;
+
+  @CreateDateColumn({ type: "date" })
+  createdAt: string;
+
+  @UpdateDateColumn({ type: "date" })
+  updatedAt: string;
+
+  @OneToOne(() => Address)
+  @JoinColumn()
+  address: Address;
+
+  @ManyToOne(() => Category, (category) => category.realEstate)
+  @JoinColumn()
+  category: Category;
+
+  @OneToMany(() => Schedule, (schedules) => schedules.realEstate)
+  schedules: Schedule[];
 }
-
-@Entity("realEstate")
-export class RealEstate {
-  @PrimaryGeneratedColumn("uuid")
-  id: string;
-
-  @Column()
-  cep: string;
-
-  @Column()
-  complement: string;
-
-  @Column()
-  number: number;
-
-  @Column({ type: "enum", enum: TypeEnum, default: TypeEnum.BUY })
-  type: TypeEnum;
-
-  @Column({ nullable: true })
-  duration: number;
-
-  @Column({ type: "date", nullable: true })
-  rentStartDate: string;
-
-  @ManyToOne(() => User, (user) => user.realEstate)
-  user: User;
-}
+export { RealEstate };

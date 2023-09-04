@@ -1,22 +1,45 @@
 import { Router } from "express";
-import { createAdminController } from "../controllers/admin.controller";
-import { adminExistsMiddleware } from "../middlewares/adminExists.middleware";
 import {
   createUserController,
   deleteUserController,
-  listenOneUserController,
   retrieveAllUserController,
   updateUserController,
-} from "../controllers/users.controller";
+} from "../controllers/users.controllers";
+import { ensureDataAlreadyInDataBase } from "../middlewares/ensureDataAlreadyInDataBase.middleware";
+import { ensureDataIsValidMiddleware } from "../middlewares/ensureDataIsValid.middleware";
+import { ensureIsAdminTrue } from "../middlewares/ensureIsAdmin.middleware";
+import { ensureTokenValid } from "../middlewares/ensureTokenIsValid.middleware";
+import { ensureUserExistsMiddleware } from "../middlewares/ensureUserExists.middleware";
+import { ensureUserLogged } from "../middlewares/ensureUserLogged.middleware";
+import { userSchema, userUpdateSchema } from "../schemas/users.schemas";
 
-export const createAdmin = Router();
+export const userRoutes = Router();
 
-createAdmin.post("", adminExistsMiddleware, createAdminController);
+userRoutes.post(
+  "",
+  ensureDataIsValidMiddleware(userSchema),
+  ensureDataAlreadyInDataBase,
+  createUserController
+);
 
-export const userRouter = Router();
-
-userRouter.post("", createUserController);
-userRouter.get("", retrieveAllUserController);
-userRouter.get("/:id", listenOneUserController);
-userRouter.delete("/:id", deleteUserController);
-userRouter.patch("/:id", updateUserController);
+userRoutes.get(
+  "",
+  ensureTokenValid,
+  ensureIsAdminTrue,
+  retrieveAllUserController
+);
+userRoutes.delete(
+  "/:id",
+  ensureUserExistsMiddleware,
+  ensureTokenValid,
+  ensureIsAdminTrue,
+  deleteUserController
+);
+userRoutes.patch(
+  "/:id",
+  ensureUserExistsMiddleware,
+  ensureTokenValid,
+  ensureUserLogged,
+  ensureDataIsValidMiddleware(userUpdateSchema),
+  updateUserController
+);
