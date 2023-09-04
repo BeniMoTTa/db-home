@@ -7,6 +7,8 @@ import { createCategoryService } from "../services/category/createCategory.servi
 import { listAllCategoriesService } from "../services/category/listCategory.service";
 import { oneListCategoryService } from "../services/category/oneListCategory.service";
 
+// comando feito para identificar e organizar as categorias
+
 export const createCategoryController = async (req: Request, res: Response) => {
   const categoryData: CategorySchema = req.body;
 
