@@ -12,6 +12,7 @@ import { ensureTokenValid } from "../middlewares/ensureTokenIsValid.middleware";
 import { ensureUserExistsMiddleware } from "../middlewares/ensureUserExists.middleware";
 import { ensureUserLogged } from "../middlewares/ensureUserLogged.middleware";
 import { userSchema, userUpdateSchema } from "../schemas/users.schemas";
+import { createAdminController } from "../controllers/admin.controller";
 
 export const userRoutes = Router();
 
@@ -43,3 +44,7 @@ userRoutes.patch(
   ensureDataIsValidMiddleware(userUpdateSchema),
   updateUserController
 );
+
+export const createAdmin = Router();
+
+createAdmin.post("", createAdminController);

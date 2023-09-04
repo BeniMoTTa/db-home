@@ -1,18 +1,18 @@
 import { Request, Response } from "express";
-import { User } from "../entities/user.entity";
+import { User } from "../entities/users.entity";
 import { AppDataSource } from "../data-source";
 
 export const createAdminController = async (req: Request, res: Response) => {
   try {
     const adminRepository = AppDataSource.getRepository(User);
     const adminUser = adminRepository.create({
-      userName: "admin",
-      userPassword: "admin123",
-      userEmail: "admin@mail.com",
-      userPhoto: "https://cdn-icons-png.flaticon.com/512/2304/2304226.png",
-      userCep: "45990-000",
-      userComplement: "casa",
-      isAdmin: true,
+      name: "admin",
+      password: "admin123",
+      email: "admin@mail.com",
+      photoPath: "https://cdn-icons-png.flaticon.com/512/2304/2304226.png",
+      CEP: "45990000",
+      complement: "casa",
+      admin: true,
     });
     await adminRepository.save(adminUser);
     res.status(201).json({ message: "Admin user successfully." });

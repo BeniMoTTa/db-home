@@ -27,6 +27,15 @@ class User {
   @Column({ type: "varchar", length: 120 })
   password: string;
 
+  @Column({ type: "varchar", length: 255, nullable: true })
+  photoPath: string | null;
+
+  @Column({ type: "varchar", length: 8 })
+  CEP: string;
+
+  @Column({ type: "varchar", length: 255 })
+  complement: string;
+
   @CreateDateColumn({ type: "date" })
   createdAt: string;
 
